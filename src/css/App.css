@@ -1,0 +1,17 @@
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.overlay {
+  position: absolute;
+  top: 60px; /* or whatever height your navbar is */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 60px);
+  background: rgba(0, 0, 0, 0.6); /* optional blur/overlay */
+  z-index: 10;
+}
