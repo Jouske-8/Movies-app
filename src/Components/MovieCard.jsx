@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "../css/MovieCard.css";
 
 export default function MovieCard({ movie, onClick }) {
+  const [alreadyFavorite, setAlreadyFavorite] = useState(false);
+
+  // Check if this movie is already in favorites on initial render
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isFavorite = favorites.some(m => m.id === movie.id);
+    setAlreadyFavorite(isFavorite);
+  }, [movie.id]);
+
   function onClickFavorite(event) {
-  event.stopPropagation();
+    event.stopPropagation();
 
-  // Get favorites from localStorage or start with empty array
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isFavorite = favorites.find(m => m.id === movie.id);
 
-  // Check if movie is already in favorites
-  const alreadyFavorite = favorites.find(m => m.id === movie.id);
+    let updatedFavorites;
+    if (isFavorite) {
+      updatedFavorites = favorites.filter(m => m.id !== movie.id);
+      setAlreadyFavorite(false);
+      console.log("Movie removed from favorites");
+    } else {
+      updatedFavorites = [...favorites, movie];
+      setAlreadyFavorite(true);
+      console.log("Movie added to favorites");
+    }
 
-  let updatedFavorites;
-  if (alreadyFavorite) {
-    // Remove movie from favorites
-    updatedFavorites = favorites.filter(m => m.id !== movie.id);
-    console.log("Movie removed from favorites");
-  } else {
-    // Add movie to favorites
-    updatedFavorites = [...favorites, movie];
-    console.log("Movie added to favorites");
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   }
-
-  // Save updated favorites back to localStorage
-  localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-}
-
 
   return (
     <div className="movie-card-wrapper">
@@ -33,7 +37,9 @@ export default function MovieCard({ movie, onClick }) {
         <div className="movie-poster">
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
           <div className="movie-overlay">
-            <button className='favorite-btn' onClick={onClickFavorite}>♥</button>
+            <button className='favorite-btn' onClick={onClickFavorite}>
+              {alreadyFavorite ? '❤️' : '🤍'}
+            </button>
           </div>
         </div>
         <div className="movie-info">
