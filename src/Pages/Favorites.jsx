@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MovieCard from '../Components/MovieCard'; // import your MovieCard component
 import "../css/Favorites.css";
 
-export default function Favorites() {
+export default function Favorites({setMovie, setCardClicked}) {
   const [favorites, setFavorites] = useState([]);
 
   // Load favorites from localStorage when component mounts
@@ -11,11 +11,16 @@ export default function Favorites() {
     setFavorites(savedFavorites);
   }, []);
 
-  // You can define openMovieModal or pass it as a prop if needed
-  function openMovieModal(movie) {
-    alert(`Open modal for ${movie.title}`); // placeholder for actual modal logic
-  }
+  // // You can define openMovieModal or pass it as a prop if needed
+  // function openMovieModal(movie) {
+  //   alert(`Open modal for ${movie.title}`); // placeholder for actual modal logic
+  // }
 
+  const openMovieModal = (movie) => {
+        setMovie(movie);
+        setCardClicked(true);
+  };
+  
   if (favorites.length === 0) {
     return (
       <div className='favorites-empty'>
@@ -24,15 +29,16 @@ export default function Favorites() {
       </div>
     );
   }
+  
 
   return (
     <div className="movies-grid">
       {favorites.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          movie={movie}
-          onClick={() => openMovieModal(movie)}
-        />
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onClick={() => openMovieModal(movie)}
+          />
       ))}
     </div>
   );
