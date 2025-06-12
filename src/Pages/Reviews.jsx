@@ -12,7 +12,7 @@ export default function Reviews({ setMovie, setCardClicked, setReviewEvent }) {
     setReviews(savedReviews);
   }, []);
 
-  console.log({ setMovie, setCardClicked, setReviewEvent });
+  // console.log({ setMovie, setCardClicked, setReviewEvent });
   const handleEditReview = (review) => {
     // Confirm what gets logged here:
     // console.log(review.movieID);
@@ -31,7 +31,7 @@ export default function Reviews({ setMovie, setCardClicked, setReviewEvent }) {
       </div>
     );
   }
-  console.log(reviews.length);
+  // console.log(reviews.length);
   return (
     <div className="movies-grid">
       {reviews.map((review, index) => (
