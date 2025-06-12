@@ -11,6 +11,7 @@ export default function Navbar() {
         <div className='navbar-links'>
             <Link to="/" className='nav-link'>Movies</Link>
             <Link to="/favorites" className='nav-link'>Favorites</Link>
+            <Link to="/reviews" className='nav-link'>Reviews</Link>
         </div>
     </nav>
   )

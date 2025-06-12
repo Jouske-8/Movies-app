@@ -4,6 +4,7 @@ import Home from './Pages/Home';
 import Favorites from './Pages/Favorites';
 import Navbar from './Components/Navbar';
 import Display from './Pages/Display';
+import Reviews from './Pages/Reviews';
 import './css/App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Display />} />
           <Route path='/favorites' element={<Favorites />} />
+          <Route path='/reviews' element={<Reviews />} />
         </Routes>
       </main>
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import "../css/MovieOnClick.css";
 
-export default function MovieOnClick({ movie, setCardClicked }) {
+export default function MovieOnClick({ movie, setCardClicked, setReviewEvent }) {
   const handleBackgroundClick = () => {
     setCardClicked(false);
   };
@@ -9,6 +9,12 @@ export default function MovieOnClick({ movie, setCardClicked }) {
   const stopPropagation = (e) => {
     e.stopPropagation();
   };
+
+  const handleReviewClick = () => {
+    setCardClicked(false);
+    setReviewEvent(true);
+    console.log('You Want to write a review');
+  }
 
   const stars = Math.round(movie.vote_average / 2); // Convert 10-point rating to 5-star scale
 
@@ -30,7 +36,7 @@ export default function MovieOnClick({ movie, setCardClicked }) {
           </div>
 
           <p>{movie.overview}</p>
-          <button>Watch now ▶</button>
+          <button onClick={handleReviewClick}>Write Review</button>
         </div>
       </div>
     </div>
