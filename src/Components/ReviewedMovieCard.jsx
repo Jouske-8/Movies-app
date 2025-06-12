@@ -13,14 +13,22 @@ export default function ReviewedMovieCard({ movie, review, onEdit }) {
         <div className="movie-info">
           <h3>{movie.title}</h3>
           <p>{movie.release_date?.split("-")[0]}</p>
+
           <div className="review-details">
-            <p><strong>Rating:</strong> <div className="rating">
-              {[...Array(5)].map((_, index) => (
-                <span key={index}>{index < review.rate ? '⭐️' : ''}</span>
-              ))}
-            </div></p>
-            <p><strong>Comment:</strong> {review.comment}</p>
+            <div className="rating-section">
+              <strong>Rating:</strong>
+              <div className="rating">
+                {[...Array(5)].map((_, index) => (
+                  <span key={index}>{index < review.rate ? '⭐️' : ''}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="comment-section">
+              <strong>Comment:</strong> {review.comment}
+            </div>
           </div>
+
           <button className="edit-review-btn" onClick={() => onEdit(review)}>
             ✏️ Edit Review
           </button>
